@@ -1,22 +1,42 @@
+<ion-view view-title="Notes">
+  <ion-content>
+ <ion-list  
+          show-delete="shouldShowDelete"
+          show-reorder="shouldShowReorder"
+          can-swipe="listCanSwipe">
+  <ion-item ng-repeat="n in notes"
+            class=" ">
+ 
+    <h2>{{n.title}}</h2>
+    <p>{{n.note}}</p>
+    <ion-option-button class="button-positive"
+                       ng-click="share(item)">
+      Share
+      Share
+    </ion-option-button>
+    <ion-option-button class="button-info"
+                       ng-click="edit(item)">
+      Edit
+    </ion-option-button>
+    <ion-delete-button class="ion-minus-circled"
+                       ng-click="items.splice($index, 1)">
+    </ion-delete-button>
+    <ion-reorder-button class="ion-navicon"
+                        on-reorder="reorderItem(item, $fromIndex, $toIndex)">
+    </ion-reorder-button>
 
+  </ion-item>
+</ion-list>
+  </ion-content>
+</ion-view>
 
-<ion-header-bar align-title="left" class="bar-positive">
-  <div class="buttons">
-    <button class="button" ng-click="doSomething()">Left Button</button>
-  </div>
-  <h1 class="title">Title!</h1>
-  <div class="buttons">
-    <button class="button">Right Button</button>
-  </div>
-</ion-header-bar>
-
-
+<!-- 
+ <br>
+<ion-view view-title="Test"> 
 <ion-content class="has-header">
-<ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
 
+
+  
  </ion-content>
  
+ </ion-view> -->
