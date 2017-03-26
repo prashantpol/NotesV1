@@ -11,12 +11,13 @@
     <p>{{n.note}}</p>
     <ion-option-button class="button-positive"
                        ng-click="share(item)">
-      Share
-      Share
+      <span class="ion-android-share-alt" style="font-size: 30px"></span>
+       
     </ion-option-button>
     <ion-option-button class="button-info"
                        ng-click="edit(item)">
-      Edit
+            <span class="ion-edit" style="font-size: 30px"></span>
+
     </ion-option-button>
     <ion-delete-button class="ion-minus-circled"
                        ng-click="items.splice($index, 1)">

@@ -1,92 +1,72 @@
-var app=angular.module('starter.controllers', []);
+var app=angular.module('starter.controllers', ['firebase']);
 
  
-app.controller('NotesCtrl', function($scope,$state, $stateParams,$firebaseObject) {
+app.controller('NotesCtrl', function($scope,$state, $stateParams,$firebaseArray,$firebaseObject) {
  
  $scope.shouldShowDelete = false;
  $scope.shouldShowReorder = false;
  $scope.listCanSwipe = true
-   $scope.titlename='';
+ $scope.titlename='';
+ var ref=firebase.database().ref();
 
-var ref=firebase.database().ref();
-$scope.name=$firebaseObject(ref);
+
+     var notes = firebase.database().ref().child('notes');
+        notes.on('value', function(snapshot){
+
+          //Finally you get the 'posts' node and send to scope
+          $scope.notes = snapshot.val();
+
+          console.log(snapshot.val());
+
+        });
+ 
+     //$scope.notes = $firebaseArray(ref);
+// $scope.getData=function(){
+
+//      var notes = firebase.database().ref().child('notes');
+//         notes.on('value', function(snapshot){
+
+//           //Finally you get the 'posts' node and send to scope
+//           $scope.notes = snapshot.val();
+
+//           console.log(snapshot.val());
+
+//         });
+
+// };
+
  
 
-  if($state.current.name==='tab.notes')
-  {
-    $scope.titlename='Notes';
-  }
-  else if($state.current.name==='tab.add')
-  {
-    $scope.titlename='Add';
-  }
-$scope.getData=function () {
-  // body...
-    // firebase.database().ref('/').on('child_added',(snapshot)=>{
-    //   $scope.notes.push(snapshot.val())
-    // })
-}
-$scope.getData();
-
-
-  // $scope.notes=[
-  // {
-  //   title:'Pay bills',
-  //   note:'Pay Mobile bill',
-  //   date:'21/03/2017'
-  // },
-  // {  title:'Web Assigment',
-  //   note:'Note Applicaiton due',
-  //   date:'21/03/2017'
-
-  // }];
-
-  $scope.go = function (route) {
-           $state.go(route);
-  };
-
-  $scope.addNote=function (){
-
-   $state.go('tab.add',{});
-
-   // for(var i=0;i<2;i++)
-   // {
-   //     console.log(i);
-   // }
-
-  };
+ 
 
  }) ;
 
-app.controller('AddCtrl', function($scope,$state, $stateParams,$firebaseObject) {
+app.controller('AddCtrl', function($scope,$state, $stateParams,$firebaseArray) {
   $scope.test="test";
     
 var ref=firebase.database().ref();
 var messageRef=ref.child("notes");
-$scope.name=$firebaseObject(ref);
+ var list =$firebaseArray(ref);
+ console.log(list);
+  $scope.data=$firebaseArray(messageRef);
  
- var data=$firebaseObject(messageRef);
 
  $scope.insertData=function(notes)
  {
-  data.$add({title:notes.title,
+  $scope.data.$add({title:notes.title,
               note:notes.note
 
             })
   .then(function(ref)
   {
-    alert('done');
+   
+     console.log('>>>Data');
+ 
   });
     //firebase.database().ref('/').push({title:notes.title,note:notes.note});
 
  };
-$scope.notes='';
-$scope.getData=function () {
-  // body...
-    firebase.database().ref('/').on('child_added',(snapshot)=>{
-      this.notes.push(snapshot.val())
-    })
-}
+ 
  
  
  });
