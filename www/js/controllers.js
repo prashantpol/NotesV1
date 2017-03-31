@@ -76,6 +76,17 @@ console.log('Current Update');
  };
  
 
+//  $scope.share=function(t)
+// {
+//   if(t=='f')
+//   {
+//     window.plugins.socialsharing
+//     .shareViaFacebook('f','Hey How','','link');
+//   }
+
+// }
+
+
 $scope.remove=function(notes)
 {
   $scope.notes.$remove(notes);
@@ -123,6 +134,19 @@ if($state.current.name==='tab.notes')
  
 
  }) ;
+
+app.controller('Social',['$scope',function($scope){
+$scope.share=function(t)
+{
+  if(t=='f')
+  {
+    window.plugins.socialsharing
+    .shareViaFacebook('f','Hey How','','link');
+  }
+
+}
+
+}]);
 
 app.controller('AddCtrl', function($scope,$state, $stateParams,EditData) {
   $scope.test="test";
