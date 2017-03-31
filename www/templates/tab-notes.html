@@ -1,33 +1,55 @@
 <ion-view view-title="Notes">
   <ion-content>
- <ion-list  
-          show-delete="shouldShowDelete"
-          show-reorder="shouldShowReorder"
-          can-swipe="listCanSwipe">
-  <ion-item ng-repeat="n in notes"
-            class=" ">
  
-    <h2>{{n.title}}</h2>
-    <p>{{n.note}}</p>
-    <ion-option-button class="button-positive"
-                       ng-click="share(item)">
+
+   <div  class="container" ng-show="edittrue" style="margin-top: 10px">
+        <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" ng-model="editnotes.title" id="title" style="border: 1px solid black;padding:10px" >
+      </div>
+
+       <div class="form-group">
+        <label for="notes">Notes</label>
+        <input type="text" class="form-control" id="notes" ng-model="editnotes.note" style="border: 1px solid black;padding:10px" >
+      </div>
+
+        <div padding>
+            <button ion-button   class="btn btn-success bottom-align-text pull-right" ng-click="update(editnotes.id)" style="width: 150px">Update</button>
+      </div>
+
+        <div padding>
+            <button ion-button   class="btn btn-primary bottom-align-text pull-left" ng-click="showData()" style="width: 150px">Go Back</button>
+      </div>
+
+      <br>
+
+    </div>
+ 
+
+
+<ion-list ng-show="!edittrue">
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="n in notes" type="item-text-wrap" >
+          <h2>{{n.title}}</h2>
+         <p>{{n.note}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive ion-trash-a" style="font-size: 30px" ng-click="remove(n)">
+           
+        </ion-option-button>
+
+         <ion-option-button class="button-positive"
+                       ng-click="share(n)">
       <span class="ion-android-share-alt" style="font-size: 30px"></span>
        
     </ion-option-button>
     <ion-option-button class="button-info"
-                       ng-click="edit(item)">
+                       ng-click="edit(n)" >
             <span class="ion-edit" style="font-size: 30px"></span>
 
     </ion-option-button>
-    <ion-delete-button class="ion-minus-circled"
-                       ng-click="items.splice($index, 1)">
-    </ion-delete-button>
-    <ion-reorder-button class="ion-navicon"
-                        on-reorder="reorderItem(item, $fromIndex, $toIndex)">
-    </ion-reorder-button>
 
-  </ion-item>
-</ion-list>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
 

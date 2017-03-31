@@ -58,7 +58,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
       views: {
         'tab-add': {
           templateUrl: 'templates/tab-addnotes.html',
-          controller: 'AddCtrl'
+          controller: 'NotesCtrl'
         }
       }
     });
