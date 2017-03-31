@@ -1,7 +1,7 @@
 <ion-view view-title="Notes">
   <ion-content>
  
-<!-- 
+
    <div  class="container" ng-show="edittrue" style="margin-top: 10px">
         <div class="form-group">
         <label for="title">Title</label>
@@ -24,10 +24,10 @@
       <br>
 
     </div>
-  -->
+ 
 
 
-<ion-list >
+<ion-list ng-show="!edittrue">
       <ion-item class="item-remove-animate item-icon-right" ng-repeat="n in notes" type="item-text-wrap" >
           <h2>{{n.title}}</h2>
          <p>{{n.note}}</p>
